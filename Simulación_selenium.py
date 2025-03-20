@@ -1,3 +1,4 @@
+#Imports necesarios
 import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -9,7 +10,7 @@ import time
 
 class pruebaSauceDemo(unittest.TestCase):
 
-    #Iniciar el controlador de Microsoft Edge
+    #Inicia el controlador de Microsoft Edge
     def setUp(self):
         edge_opciones = webdriver.EdgeOptions()
         edge_opciones.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -26,7 +27,8 @@ class pruebaSauceDemo(unittest.TestCase):
         WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, "inventory_list"))
         )
-    #test1
+        
+    #Caso de prueba 1
     def test_agrgar_producto_al_carrito(self):
         self.login("standard_user", "secret_sauce")
         time.sleep(3)
@@ -36,7 +38,7 @@ class pruebaSauceDemo(unittest.TestCase):
         cart_count = driver.find_element(By.CLASS_NAME, "shopping_cart_badge")
         self.assertEqual(cart_count.text, "1")
 
-    #test2
+    #Caso de prueba 2
     def test_eliminar_producto_del_carrito(self):
         self.login("standard_user", "secret_sauce")
         time.sleep(3)
@@ -50,7 +52,7 @@ class pruebaSauceDemo(unittest.TestCase):
         driver.find_element(By.ID, "continue-shopping").click()
         time.sleep(2)
     
-    #test3
+    #Caso de prueba 3
     def test_proceso_de_compra(self):
         self.login("standard_user", "secret_sauce")
         time.sleep(3)
@@ -74,7 +76,7 @@ class pruebaSauceDemo(unittest.TestCase):
         driver.find_element(By.ID, "back-to-products").click()
         time.sleep(3)
         
-    #test4
+    #Caso de prueba 4
     def test_filtrar_productos(self):
         self.login("standard_user", "secret_sauce")
         time.sleep(3)
@@ -95,7 +97,7 @@ class pruebaSauceDemo(unittest.TestCase):
         sort_dropdown.find_element(By.XPATH, "//option[@value='az']")
         time.sleep(3)
 
-    #test5
+    #Caso de prueba 5
     def test_navegar_por_la_pagina(self):
         self.login("standard_user", "secret_sauce")
         time.sleep(3)
@@ -116,7 +118,7 @@ class pruebaSauceDemo(unittest.TestCase):
         self.login("standard_user", "secret_sauce")
         time.sleep(3)
 
-    #test6
+    #Caso de prueba 6
     def test_logout(self):
         self.login("standard_user", "secret_sauce")
         time.sleep(3)
@@ -136,6 +138,7 @@ class pruebaSauceDemo(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-
+        
+#Ejecuta los casos de prueba
 if __name__ == "__main__":
     unittest.main()
